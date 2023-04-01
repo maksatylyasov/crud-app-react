@@ -1,9 +1,10 @@
 import logo from "./logo.svg";
 import "./App.css";
 import UserTable from "./tables/UserTable";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import AddUserForm from "./forms/AddUserForm";
+import EditUserForm from "./forms/EditUserForm";
 
 function App() {
   const usersData = [
@@ -44,8 +45,21 @@ function App() {
       <h1>CRUD App with Hooks</h1>
       <div className="flex-row">
         <div className="flex-large">
-          <h2>Add user</h2>
-          <AddUserForm addUser={addUser} />
+          {editing ? (
+            <div>
+              <h2>Edit user</h2>
+              <EditUserForm
+                setEditing={setEditing}
+                currentUser={currentUser}
+                updateUser={updateUser}
+              />
+            </div>
+          ) : (
+            <div>
+              <h2>Add user</h2>
+              <AddUserForm addUser={addUser} />
+            </div>
+          )}
         </div>
         <div className="flex-large">
           <h2>View users</h2>
